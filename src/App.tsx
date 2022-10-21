@@ -1,8 +1,19 @@
 import logo from './assets/logo.svg'
 import plusIcon from './assets/plus-icon.svg'
 import clipboard from './assets/clipboard.svg'
+import clsx from 'clsx'
+import { useState } from 'react'
+import { Trash, Check } from 'phosphor-react'
 
 function App() {
+  const [done, setDone] = useState(false)
+  const [tasks, setTasks] = useState([
+    {
+      id: 1,
+      title: 'Arrumar casa',
+    },
+  ])
+
   return (
     <div>
       <header className="bg-gray-700 w-full h-52 flex items-center justify-center">
@@ -39,17 +50,45 @@ function App() {
               </h2>
             </header>
 
-            <section className="w-full rounded-lg border-t border-t-gray-400">
-              <div className="py-16 px-6 flex flex-col justify-center items-center">
-                <img src={clipboard} alt="clipboard image" className="mb-4" />
-                <p className="text-base text-gray-300 font-bold">
-                  Você ainda não tem tarefas cadastradas <br />
-                  <span className="font-normal">
-                    Crie tarefas e organize seus itens a fazer
-                  </span>
+            {tasks.length < 0 ? (
+              <section className="w-full rounded-lg border-t border-t-gray-400">
+                <div className="py-16 px-6 flex flex-col justify-center items-center">
+                  <img src={clipboard} alt="clipboard image" className="mb-4" />
+                  <p className="text-base text-gray-300 font-bold">
+                    Você ainda não tem tarefas cadastradas <br />
+                    <span className="font-normal">
+                      Crie tarefas e organize seus itens a fazer
+                    </span>
+                  </p>
+                </div>
+              </section>
+            ) : (
+              <section className="w-full p-4 text-gray-100 text-sm rounded-lg bg-gray-500 border-gray-400 flex justify-around">
+                <div className="w-6 h-6 flex items-center justify-center">
+                  <button
+                    onClick={() => setDone(!done)}
+                    className={clsx(
+                      'w-[17.45px] h-[17.45px] flex items-center justify-center rounded-full border-2 border-blue hover:border-blue-dark hover:bg-blue-dark hover:bg-opacity-20 transition transition-200',
+                      {
+                        'bg-purple-dark border-none': done,
+                      },
+                    )}
+                  >
+                    {done && <Check />}
+                  </button>
+                </div>
+
+                <p className={clsx('w-5/6', { 'line-through': done })}>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Ipsam minima vel mollitia officiis sint eveniet exercitationem
+                  delectus, provident alias tempore.
                 </p>
-              </div>
-            </section>
+
+                <button className="w-6 h-6 transition text-gray-300 hover:text-danger transition-300 flex items-center rounded justify-center hover:bg-gray-400">
+                  <Trash className="w-[17px] h-[17px]" />
+                </button>
+              </section>
+            )}
           </div>
         </section>
       </div>
