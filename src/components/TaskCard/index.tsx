@@ -22,9 +22,11 @@ export function TaskCard({
         <button
           onClick={() => onUpdateDone(id)}
           className={clsx(
-            'w-[17px] h-[17px] flex items-center justify-center rounded-full border-2 border-blue hover:border-blue-dark hover:bg-blue-dark hover:bg-opacity-20 transition transition-200',
+            'w-[17px] h-[17px] flex items-center justify-center rounded-full border-2 transition transition-200',
             {
-              'bg-purple-dark border-none': done,
+              'bg-purple-dark border-none hover:bg-purple': done,
+              'border-blue hover:border-blue-dark hover:bg-blue-dark hover:bg-opacity-20':
+                !done,
             },
           )}
         >

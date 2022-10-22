@@ -17,6 +17,8 @@ module.exports = {
       blue: '#4EA8DE',
       'blue-dark': '#1E6F9F',
       danger: '#E25858',
+
+      white: '#FFFFFF',
     },
     fontSize: {
       xs: 12,
